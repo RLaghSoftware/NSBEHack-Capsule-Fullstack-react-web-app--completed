@@ -1,21 +1,19 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require('body-parser');
 const cors = require("cors");
  
-const app = express(); //sets up backend
+const app = express();
  
 app.use(cors());
-// parse application/json
-app.use(bodyParser.json({
- 
-}));
-  var mysql = require('mysql');
-//create database connection
+app.use(bodyParser.json({}));
+
+const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host     : 'localhost',
-    database : 'capsule',   // the name of your db
-    user     : 'root',     // your root username
-    password : 'your_current_password'
+    host     : process.env.DB_HOST,
+    database : process.env.DB_NAME,
+    user     : process.env.DB_USER,
+    password : process.env.DB_PASSWORD
 });
 conn.connect((err) =>{
     if(err) throw err;
@@ -76,10 +74,9 @@ conn.connect((err) =>{
       });
   });
 
-// conects to local host
-  app.listen(3000, () => {
-    console.log("Server running successfully on 3000");
- 
+const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running successfully on ${PORT}`);
   });
 
  

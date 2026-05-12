@@ -6,7 +6,7 @@ import React, { useState } from "react";
 function submit(input, state){
     
    //fetch method to post data and add it into the local database after submit button is clicked
-     fetch('http://localhost:3000/store-data', {
+     fetch(`${process.env.REACT_APP_API_URL}/store-data`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // We convert the React state to JSON and send it as the POST body

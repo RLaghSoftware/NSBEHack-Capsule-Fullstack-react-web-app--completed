@@ -34,7 +34,7 @@ export default function ViewCapsule(input){
     function search(){ //if filters are added, system uses axios.get to send parameters to the backend, logs results, and displays data
         console.log(state.Time);
         console.log(state.EndTime);
-        axios.get('/users', { params: { fname: state.fname, sTime: state.Time, eTime: state.EndTime, Country: state.Country, City: state.City, State: state.State, Title: state.Title, Msg: state.Msg } }) 
+        axios.get(`${process.env.REACT_APP_API_URL}/users`, { params: { fname: state.fname, sTime: state.Time, eTime: state.EndTime, Country: state.Country, City: state.City, State: state.State, Title: state.Title, Msg: state.Msg } }) 
         .then((response) => {
           const data = response.data;
           setState({ users: data }); 
